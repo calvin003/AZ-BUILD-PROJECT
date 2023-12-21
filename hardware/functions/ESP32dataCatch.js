@@ -1,6 +1,6 @@
 exports = function(payload){
     var atlas = context.services.get("mongodb-atlas");
-    var coll = atlas.db("iot").collection("readings");
+    var coll = atlas.db("alarmStatus").collection("lockedStatus");
     try {
       if (payload.body) 
       {
