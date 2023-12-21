@@ -1,0 +1,74 @@
+#include <Arduino.h>
+#include <ArduinoJson.h>
+#include <WiFi.h>
+#include <HTTPClient.h>
+
+const char* serverName = "https://us-east-1.aws.data.mongodb-api.com/app/application-0-xwued/endpoint/Status";
+int analogPin = A0;
+int volt = 0;
+
+StaticJsonDocument<500> doc;
+
+void lockedStatus(int analogPin);
+
+void lockedStatus(int analogPin) {
+    volt = analogRead(analogPin);
+    volt = volt / 1000;
+    if (volt >= 1) {
+        doc["alarmStatus"]["lockedStatus"] = 1;
+    }
+    else {
+        doc["alarmStatus"]["lockedStatus"] = 0;
+    }
+
+}
+
+
+void setup()
+{
+    Serial.begin(115200);
+
+    WiFi.begin("ButtNakedIphone", "conrad123");
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.print(".");
+    }
+    Serial.println("");
+    Serial.print("Connected to WiFi network with IP Address: ");
+    Serial.println(WiFi.localIP());
+}
+
+
+void POSTData()
+{
+
+    if (WiFi.status() == WL_CONNECTED) {
+        HTTPClient http;
+
+        http.begin(serverName);
+        http.addHeader("Content-Type", "application/json");
+
+        String json;
+        serializeJson(doc, json);
+
+        Serial.println(json);
+        int httpResponseCode = http.POST(json);
+        Serial.println(httpResponseCode);
+    }
+}
+
+
+
+void loop()
+{
+    
+    delay(10000);
+    lockedStatus(analogPin);
+    Serial.println("Posting...");
+    POSTData();
+    serializeJsonPretty(doc, Serial);
+    Serial.println("\nDone.");
+}
+
+
+
