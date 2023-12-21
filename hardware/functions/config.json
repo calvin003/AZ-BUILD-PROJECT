@@ -1,0 +1,7 @@
+[
+    {
+        "name": "ESP32dataCatch",
+        "private": false,
+        "disable_arg_logs": true
+    }
+]
