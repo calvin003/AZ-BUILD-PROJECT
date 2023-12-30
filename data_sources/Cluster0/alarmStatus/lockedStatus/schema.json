@@ -1,0 +1,22 @@
+{
+    "properties": {
+        "_id": {
+            "bsonType": "objectId"
+        },
+        "alarmStatus": {
+            "bsonType": "object",
+            "properties": {
+                "lockedStatus": {
+                    "bsonType": "int"
+                }
+            }
+        },
+        "ts": {
+            "bsonType": "date"
+        }
+    },
+    "required": [
+        "_id"
+    ],
+    "title": "lockedStatus"
+}
