@@ -1,0 +1,32 @@
+{
+    "id": "658fe9692b2254c31a7117bb",
+    "name": "Trigger-0",
+    "type": "DATABASE",
+    "config": {
+        "operation_types": [
+            "INSERT",
+            "UPDATE",
+            "DELETE",
+            "REPLACE"
+        ],
+        "database": "alarmStatus",
+        "collection": "lockedStatus",
+        "service_name": "Cluster0",
+        "match": {},
+        "project": {},
+        "full_document": false,
+        "full_document_before_change": false,
+        "unordered": false,
+        "skip_catchup_events": false,
+        "tolerate_resume_errors": false,
+        "maximum_throughput": false
+    },
+    "disabled": false,
+    "event_processors": {
+        "FUNCTION": {
+            "config": {
+                "function_name": "postmanGET"
+            }
+        }
+    }
+}

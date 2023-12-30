@@ -1,0 +1,11 @@
+[
+    {
+        "name": "resetFunc",
+        "private": false
+    },
+    {
+        "name": "postmanGET",
+        "private": false,
+        "disable_arg_logs": true
+    }
+]
